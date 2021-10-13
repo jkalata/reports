@@ -1,0 +1,21 @@
+section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    border-radius: 1em;
+    background-color: transparent;
+    border: none;
+  }
+
+  h1 {
+    width: min-content;
+    font-weight: normal;
+    color: rgb(80, 80, 80);
+  }
+
+  .empty {
+    width: 32px;
+  }
+}
