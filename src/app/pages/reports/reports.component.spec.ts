@@ -1,25 +1,56 @@
+import { reportListMock } from './mocks/reports.mocks';
+import { of } from 'rxjs';
+import { ReportsService } from './services/reports.service';
+import { IReport } from './interfaces/report.interfaces';
+import { ReportListComponent } from './components/report-list/report-list.component';
+import { SearchComponent } from './components/search/search.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 import { ReportsComponent } from './reports.component';
+import { MockComponents } from 'ng-mocks';
 
 describe('ReportsComponent', () => {
+  let spectator: Spectator<ReportsComponent>;
   let component: ReportsComponent;
-  let fixture: ComponentFixture<ReportsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ReportsComponent ]
-    })
-    .compileComponents();
+  let reportsServiceMock = jasmine.createSpyObj<ReportsService>(
+    'ReportsService',
+    {
+      getReports: of(reportListMock),
+    }
+  );
+
+  const createComponent = createComponentFactory({
+    component: ReportsComponent,
+    declarations: [MockComponents(SearchComponent, ReportListComponent)],
+    providers: [{ provide: ReportsService, useValue: reportsServiceMock }],
   });
-
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('creates SearchComponent', () => {
+    expect(spectator.query(SearchComponent)).toBeTruthy();
+  });
+
+  it('creates ReportListComponent', () => {
+    expect(spectator.query(ReportListComponent)).toBeTruthy();
+  });
+
+  it('passes inputs to ReportListComponent', () => {
+    expect(spectator.query(ReportListComponent).reports).toEqual(
+      component.reports
+    );
+  });
+
+  it('gets reports from service and stores them into value', () => {
+    component['getReports']();
+    expect(component.reports).toEqual(reportListMock);
   });
 });

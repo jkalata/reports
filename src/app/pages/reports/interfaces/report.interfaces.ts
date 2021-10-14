@@ -1,6 +1,7 @@
 export interface IReport {
   date: number;
-  category: 'Finansowe' | 'Roczne' | 'Bieżące';
+  // category: 'Finansowe' | 'Roczne' | 'Bieżące';
+  category: string;
   title: string;
   description: string;
   files: IFile[];

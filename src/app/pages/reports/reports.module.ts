@@ -14,5 +14,6 @@ import { ReportsComponent } from './reports.component';
     ReportsComponent,
   ],
   imports: [CommonModule],
+  exports: [ReportsComponent],
 })
 export class ReportsModule {}

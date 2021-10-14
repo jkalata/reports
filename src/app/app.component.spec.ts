@@ -1,16 +1,33 @@
+import { ReportsComponent } from './pages/reports/reports.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MockComponents } from 'ng-mocks';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [AppComponent],
-    }).compileComponents();
+  let component: AppComponent;
+  let spectator: Spectator<AppComponent>;
+
+  const createComponent = createComponentFactory({
+    component: AppComponent,
+    declarations: [MockComponents(HeaderComponent, ReportsComponent)],
+  });
+
+  beforeEach(() => {
+    spectator = createComponent();
+    component = spectator.component;
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
+  });
+
+  it('creates HeaderComponent', () => {
+    expect(spectator.query(HeaderComponent)).toBeTruthy();
+  });
+
+  it('creates ReportsComponent', () => {
+    expect(spectator.query(ReportsComponent)).toBeTruthy();
   });
 });
