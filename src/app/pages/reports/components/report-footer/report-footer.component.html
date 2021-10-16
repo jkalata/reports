@@ -1,0 +1,14 @@
+<footer>
+  <a href="">Zobacz raport</a>
+  <ng-container *ngIf="files.length === 1; else accordion">
+    <a>Pobierz {{ files[0].filename }}.pdf {{ getFileSize(files[0]) }}</a>
+  </ng-container>
+  <ng-template #accordion>
+    <div (click)="opened = !opened">
+      <button class="accordion">Pliki do pobrania ({{ files.length }})</button>
+      <div class="panel" [class.opened]="opened">
+        <p>Lorem ipsum...</p>
+      </div>
+    </div>
+  </ng-template>
+</footer>

@@ -1,4 +1,5 @@
-import { IReport } from './../../interfaces/report.interfaces';
+import { DateTime } from 'luxon';
+import { IReport, IFormattedDate } from './../../interfaces/report.interfaces';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -10,5 +11,17 @@ export class ReportComponent implements OnInit {
   @Input() report: IReport;
   constructor() {}
 
-  ngOnInit(): void {}
+  formattedDate: IFormattedDate;
+
+  ngOnInit(): void {
+    this.formattedDate = this.formatDate();
+  }
+
+  private formatDate(): IFormattedDate {
+    const dateTime = DateTime.fromMillis(this.report.date);
+    return {
+      date: dateTime.toFormat('dd.MM.yyyy'),
+      time: dateTime.toFormat('hh.mm'),
+    };
+  }
 }

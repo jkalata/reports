@@ -1,0 +1,11 @@
+div {
+  background: white;
+  padding: 2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  app-search-bar {
+    width: 100%;
+  }
+}

@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1em;
+
+  .date-and-category {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    .date-time {
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
+    }
+
+    .category {
+      margin-top: 1em;
+      color: grey;
+    }
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .title {
+      font-size: x-large;
+      font-weight: 600;
+    }
+
+    .description {
+      font-weight: 500;
+    }
+  }
+}

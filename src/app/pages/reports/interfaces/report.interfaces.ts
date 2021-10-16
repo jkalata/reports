@@ -11,3 +11,8 @@ export interface IFile {
   filename: string;
   filesize: number;
 }
+
+export interface IFormattedDate {
+  date: string;
+  time: string;
+}

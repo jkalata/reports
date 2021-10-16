@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 import { ReportsService } from './services/reports.service';
 import { IReport } from './interfaces/report.interfaces';
 import { ReportListComponent } from './components/report-list/report-list.component';
-import { SearchComponent } from './components/search/search.component';
+import { FilterComponent } from './components/filter/filter.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
@@ -23,7 +23,7 @@ describe('ReportsComponent', () => {
 
   const createComponent = createComponentFactory({
     component: ReportsComponent,
-    declarations: [MockComponents(SearchComponent, ReportListComponent)],
+    declarations: [MockComponents(FilterComponent, ReportListComponent)],
     providers: [{ provide: ReportsService, useValue: reportsServiceMock }],
   });
   beforeEach(() => {
@@ -35,8 +35,12 @@ describe('ReportsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('creates SearchComponent', () => {
-    expect(spectator.query(SearchComponent)).toBeTruthy();
+  it('creates FilterComponent', () => {
+    expect(spectator.query(FilterComponent)).toBeTruthy();
+  });
+
+  it('passes inputs to FilterComponent', () => {
+    expect(spectator.query(FilterComponent).reports).toEqual(component.reports);
   });
 
   it('creates ReportListComponent', () => {

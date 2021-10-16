@@ -1,1 +1,14 @@
-<p>report works!</p>
+<div class="container">
+  <div class="date-and-category">
+    <div class="date-time">
+      <span>{{ formattedDate.date }}</span>
+      <span>{{ formattedDate.time }}</span>
+    </div>
+    <span class="category">{{ report.category }}</span>
+  </div>
+  <div class="details">
+    <header class="title">{{ report.title }}</header>
+    <section class="description">{{ report.description }}</section>
+    <app-report-footer [files]="report.files"></app-report-footer>
+  </div>
+</div>

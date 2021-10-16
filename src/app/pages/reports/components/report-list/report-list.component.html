@@ -1,1 +1,6 @@
-<app-report *ngFor="let report of reports" [report]="report"></app-report>
+<div>
+  <app-report
+    *ngFor="let report of reports | yearFilter"
+    [report]="report"
+  ></app-report>
+</div>

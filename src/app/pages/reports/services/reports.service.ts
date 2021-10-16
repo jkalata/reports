@@ -10,6 +10,7 @@ export class ReportsService {
   constructor() {}
 
   getReports(): Observable<IReport[]> {
-    return of(data as IReport[]);
+    console.log(data['default']);
+    return of(data['default'] as IReport[]);
   }
 }

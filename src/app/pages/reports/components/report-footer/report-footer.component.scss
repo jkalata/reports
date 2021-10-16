@@ -1,0 +1,22 @@
+footer {
+  display: flex;
+  flex-direction: row;
+}
+.accordion {
+  background: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  font-size: medium;
+}
+
+.panel {
+  background-color: white;
+  overflow: hidden;
+  max-height: 0;
+}
+
+.panel.opened {
+  max-height: none;
+}
