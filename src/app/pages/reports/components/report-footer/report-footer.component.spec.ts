@@ -1,22 +1,33 @@
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { IFile } from './../../interfaces/report.interfaces';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReportFooterComponent } from './report-footer.component';
 
 describe('ReportFooterComponent', () => {
+  let spectator: Spectator<ReportFooterComponent>;
   let component: ReportFooterComponent;
-  let fixture: ComponentFixture<ReportFooterComponent>;
+  const filesMock: IFile[] = [
+    {
+      filename: 'filename1',
+      filesize: 123,
+    },
+    {
+      filename: 'filename2',
+      filesize: 234,
+    },
+  ];
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ReportFooterComponent ]
-    })
-    .compileComponents();
+  const createComponent = createComponentFactory({
+    component: ReportFooterComponent,
   });
-
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReportFooterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    spectator = createComponent({
+      props: {
+        files: filesMock,
+      },
+    });
+    component = spectator.component;
   });
 
   it('should create', () => {

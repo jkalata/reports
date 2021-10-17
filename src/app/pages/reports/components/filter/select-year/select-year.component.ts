@@ -1,4 +1,4 @@
-import { FilterService } from './../../services/filter.service';
+import { FilterService } from './../../../services/filter.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./select-year.component.scss'],
 })
 export class SelectYearComponent implements OnInit {
-  @Input() years: number[];
+  years: number[];
 
-  constructor(private filterService: FilterService) {}
+  constructor(private filterService: FilterService) {
+    this.years = this.filterService.getAvailableYears();
+  }
 
   ngOnInit(): void {
     this.filterService.setActiveYearFilter(this.years[0]);

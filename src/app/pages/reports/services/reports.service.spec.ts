@@ -21,7 +21,7 @@ describe('ReportsService', () => {
 
   it('returns json data as Observable', () => {
     service.getReports().subscribe((response) => {
-      expect(response).toEqual(data as IReport[]);
+      expect(response).toEqual(data['default']);
     });
   });
 });

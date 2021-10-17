@@ -1,0 +1,9 @@
+<div>
+  <input
+    data-testid="input"
+    placeholder="Podaj nazwę, numer lub datę raportu"
+    (keydown.enter)="changeTextFilter()"
+    [(ngModel)]="textFilter"
+  />
+  <button (click)="changeTextFilter()">Wyszukaj</button>
+</div>

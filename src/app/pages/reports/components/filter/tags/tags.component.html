@@ -1,0 +1,8 @@
+<div class="tags-container">
+  <app-tag tag="Wszystkie" (click)="resetTags()"></app-tag>
+  <app-tag
+    *ngFor="let tag of tags"
+    [tag]="tag"
+    (click)="toggleTag(tag)"
+  ></app-tag>
+</div>
