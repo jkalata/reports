@@ -1,13 +1,28 @@
 .tag {
   padding: 0.5em;
-  border: solid 1px black;
-  margin: 1em;
+  margin-right: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-radius: 0.5em;
+  display: flex;
+  align-items: center;
 }
 
 .inactive {
+  border: solid 1px grey;
   color: grey;
 }
 
 .active {
+  border: solid 1px black;
   color: black;
+  background-color: #f7fcfd;
+}
+
+.x-icon {
+  font-size: 1em;
+}
+
+.x-icon.hidden {
+  color: transparent;
 }

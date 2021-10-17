@@ -1,15 +1,19 @@
-div {
-  border-bottom: solid 1px black;
+.input {
   margin-left: 1em;
   width: 100%;
   display: flex;
   justify-content: space-between;
-
-  input {
-    border: none;
-    width: 100%;
-  }
+  align-items: center;
 
   button {
+    height: min-content;
+    margin: 0 1em;
+    border-radius: 2em;
+    padding: 1em 2em;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
   }
 }

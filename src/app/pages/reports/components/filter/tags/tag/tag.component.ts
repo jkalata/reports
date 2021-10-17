@@ -16,9 +16,15 @@ export class TagComponent implements OnDestroy {
   constructor(private filterService: FilterService) {
     this.subSink.add(
       this.filterService.getActiveTags().subscribe((activeTags) => {
-        this.active = activeTags.includes(this.tag);
+        this.active = this.isActive(activeTags);
       })
     );
+  }
+
+  private isActive(activeTags: string[]): boolean {
+    return this.tag === 'Wszystkie'
+      ? activeTags.length === 0
+      : activeTags.includes(this.tag);
   }
 
   ngOnDestroy() {

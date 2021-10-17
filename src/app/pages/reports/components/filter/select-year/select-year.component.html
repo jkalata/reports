@@ -1,5 +1,7 @@
-<select (change)="changeYearFilter($event)">
-  <option *ngFor="let year of years" [value]="year">
-    {{ year }}
-  </option>
-</select>
+<div class="select">
+  <select (change)="changeYearFilter($event)">
+    <option *ngFor="let year of years" [value]="year">
+      {{ year }}
+    </option>
+  </select>
+</div>

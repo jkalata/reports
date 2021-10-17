@@ -1,7 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~material-icons/iconfont/material-icons.css";
+:root {
+  --select-border: #777;
+  --select-focus: blue;
+  --select-arrow: var(--select-border);
+  --primary-color: #65c1d4;
+}
 body {
   background-color: #f2f2f2;
   font-family: "Lato";
   padding: 2em;
+}
+
+.input {
+  box-shadow: 0px 0px 16px 0px rgba(191, 191, 191, 0.75);
+  -webkit-box-shadow: 0px 0px 16px 0px rgba(191, 191, 191, 0.75);
+  -moz-box-shadow: 0px 0px 16px 0px rgba(191, 191, 191, 0.75);
+  border-bottom: solid 2px black;
+}
+input {
+  padding: 1em;
+  font-size: x-large;
+  border: none;
+  width: 100%;
+}
+
+.select {
+  box-shadow: 0px 0px 16px 0px rgba(191, 191, 191, 0.75);
+  -webkit-box-shadow: 0px 0px 16px 0px rgba(191, 191, 191, 0.75);
+  -moz-box-shadow: 0px 0px 16px 0px rgba(191, 191, 191, 0.75);
+  display: grid;
+  align-items: center;
+  grid-template-areas: "select";
+  font-size: x-large;
+  width: 6em;
+  border-bottom: solid 2px black;
+}
+
+.select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  margin-right: 0.5em;
+  background-color: var(--primary-color);
+  clip-path: polygon(20% 0%, 0 0, 50% 100%, 100% 0, 80% 0%, 50% 61%);
+}
+
+select,
+.select:after {
+  grid-area: select;
+  justify-self: end;
+}
+
+select {
+  // A reset of styles, including removing the default dropdown arrow
+  appearance: none;
+  // Additional resets for further consistency
+  background-color: transparent;
+  border: none;
+  padding: 1em;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
 }
