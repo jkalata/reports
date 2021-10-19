@@ -1,27 +1,27 @@
 .container {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  padding: 1em;
+  padding: 2em;
 
+  .category {
+    margin-top: 1em;
+    color: grey;
+    font-weight: normal;
+  }
   .date-and-category {
     display: flex;
     flex-direction: column;
-    padding: 1em;
+    padding: 0 2em;
     .date-time {
       display: flex;
       flex-direction: column;
       font-weight: bold;
     }
-
-    .category {
-      margin-top: 1em;
-      color: grey;
-    }
   }
 
   .details {
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: space-between;
 

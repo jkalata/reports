@@ -1,9 +1,7 @@
 import { DateTime } from 'luxon';
-import { map } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { IReport } from './../interfaces/report.interfaces';
 import { SpectatorService, createServiceFactory } from '@ngneat/spectator';
-import { TestBed } from '@angular/core/testing';
-
 import { FilterService } from './filter.service';
 
 describe('FilterService', () => {
@@ -37,6 +35,45 @@ describe('FilterService', () => {
 
   it('creates service', () => {
     expect(service).toBeTruthy();
+  });
+
+  describe('adding and removing tags', () => {
+    const tagList = ['tag1', 'tag2'];
+
+    beforeEach(() => {
+      service.addActiveTag(tagList[0]);
+    });
+
+    it('adds tag to list', () => {
+      service.addActiveTag(tagList[1]);
+
+      service
+        .getActiveTags()
+        .pipe(take(1))
+        .subscribe((activeTags) => {
+          expect(activeTags).toEqual(tagList);
+        });
+    });
+
+    it('removes tag from list', () => {
+      service.removeActiveTag(tagList[1]);
+      service
+        .getActiveTags()
+        .pipe(take(1))
+        .subscribe((activeTags) => {
+          expect(activeTags).toEqual([tagList[0]]);
+        });
+    });
+
+    it('resets tags', () => {
+      service.resetActiveTags();
+      service
+        .getActiveTags()
+        .pipe(take(1))
+        .subscribe((activeTags) => {
+          expect(activeTags).toEqual([]);
+        });
+    });
   });
 
   it('calculates available years from report list', () => {

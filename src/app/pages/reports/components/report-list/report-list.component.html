@@ -1,3 +1,5 @@
-<div>
-  <app-report *ngFor="let report of reports" [report]="report"></app-report>
+<div class="report-list-container">
+  <div class="report" *ngFor="let report of reports">
+    <app-report [report]="report"></app-report>
+  </div>
 </div>

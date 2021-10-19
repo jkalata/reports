@@ -1,6 +1,6 @@
+import { TagsComponent } from './tags/tags.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
-import { reportListMock, expectedYearsMock } from '../../mocks/reports.mocks';
-import { MockComponent, MockComponents } from 'ng-mocks';
+import { MockComponents } from 'ng-mocks';
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { FilterComponent } from './filter.component';
 import { SelectYearComponent } from './select-year/select-year.component';
@@ -11,7 +11,9 @@ describe('SearchComponent', () => {
 
   const createComponent = createComponentFactory({
     component: FilterComponent,
-    declarations: [MockComponents(SelectYearComponent, SearchBarComponent)],
+    declarations: [
+      MockComponents(SelectYearComponent, SearchBarComponent, TagsComponent),
+    ],
   });
 
   beforeEach(() => {
@@ -29,5 +31,9 @@ describe('SearchComponent', () => {
 
   it('renders SearchBarComponent', () => {
     expect(spectator.query(SearchBarComponent)).toBeTruthy();
+  });
+
+  it('renders TagsComponent', () => {
+    expect(spectator.query(TagsComponent)).toBeTruthy();
   });
 });

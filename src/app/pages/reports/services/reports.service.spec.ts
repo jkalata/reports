@@ -1,4 +1,3 @@
-import { IReport } from './../interfaces/report.interfaces';
 import { createServiceFactory, SpectatorService } from '@ngneat/spectator';
 import { ReportsService } from './reports.service';
 import * as data from 'src/assets/data.json';

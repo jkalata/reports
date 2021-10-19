@@ -1,5 +1,5 @@
 import { FilterService } from './../../../services/filter.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-select-year',

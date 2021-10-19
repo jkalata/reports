@@ -1,10 +1,11 @@
+import { SubSink } from 'subsink';
 import { DateTime } from 'luxon';
 import { FilterService } from './services/filter.service';
 import { ReportsService } from './services/reports.service';
 import { IReport } from './interfaces/report.interfaces';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { filter, map, mergeMap, toArray } from 'rxjs/operators';
-import { Subscription, of, from, forkJoin, merge, combineLatest } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
@@ -13,8 +14,7 @@ import { Subscription, of, from, forkJoin, merge, combineLatest } from 'rxjs';
 export class ReportsComponent implements OnDestroy {
   filteredReports: IReport[];
   reports: IReport[];
-  private subcriptions: Subscription[] = [];
-
+  private subSink = new SubSink();
   constructor(
     private reportsService: ReportsService,
     private filterService: FilterService
@@ -33,7 +33,7 @@ export class ReportsComponent implements OnDestroy {
       });
   }
 
-  private initFilterServiceParams(reports: IReport[]) {
+  private initFilterServiceParams(reports: IReport[]): void {
     this.filterService.calculateAvailableYears(reports);
     this.filterService.setActiveYearFilter(
       this.filterService.getAvailableYears()[0]
@@ -42,15 +42,16 @@ export class ReportsComponent implements OnDestroy {
     this.filterService.resetActiveTags();
   }
 
-  private initFilterChangeListeners() {
-    combineLatest([
-      this.filterService.getActiveYearFilter(),
-      this.filterService.getActiveTextFilter(),
-      this.filterService.getActiveTags(),
-    ]).subscribe((filterArray) => {
-      console.log(filterArray);
-      this.filterReports(filterArray);
-    });
+  private initFilterChangeListeners(): void {
+    this.subSink.add(
+      combineLatest([
+        this.filterService.getActiveYearFilter(),
+        this.filterService.getActiveTextFilter(),
+        this.filterService.getActiveTags(),
+      ]).subscribe((filterArray) => {
+        this.filterReports(filterArray);
+      })
+    );
   }
 
   private filterReports([year, text, tags]: [number, string, string[]]): void {
@@ -59,27 +60,11 @@ export class ReportsComponent implements OnDestroy {
     this.filteredReports = this.filterByTags(tags, this.filteredReports);
   }
 
-  // private filterOnYearChange(): void {
-  //   this.subcriptions.push(
-  //     this.filterService.getActiveYearFilter().subscribe((yearFilter) => {
-  //       this.filteredReports = this.filterByYear(yearFilter);
-  //     })
-  //   );
-  // }
-
   private filterByYear(yearFilter: number, reports: IReport[]): IReport[] {
     return reports.filter(
       (report) => DateTime.fromMillis(report.date).year === yearFilter
     );
   }
-
-  // private filterOnTextChange(): void {
-  //   this.subcriptions.push(
-  //     this.filterService.getActiveTextFilter().subscribe((textFilter) => {
-  //       this.filteredReports = this.filterByText(textFilter);
-  //     })
-  //   );
-  // }
 
   private filterByText(textFilter: string, reports: IReport[]): IReport[] {
     return reports.filter((report) =>
@@ -95,7 +80,6 @@ export class ReportsComponent implements OnDestroy {
   }
 
   private filterByTags(tags: string[], reports: IReport[]): IReport[] {
-    console.log(tags);
     if (tags.length === 0) {
       return reports;
     } else {
@@ -106,6 +90,6 @@ export class ReportsComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subcriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subSink.unsubscribe();
   }
 }

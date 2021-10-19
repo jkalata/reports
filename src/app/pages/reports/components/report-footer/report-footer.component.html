@@ -1,14 +1,39 @@
 <footer>
-  <a href="">Zobacz raport</a>
-  <ng-container *ngIf="files.length === 1; else accordion">
-    <a>Pobierz {{ files[0].filename }}.pdf {{ getFileSize(files[0]) }}</a>
-  </ng-container>
-  <ng-template #accordion>
-    <div (click)="opened = !opened">
-      <button class="accordion">Pliki do pobrania ({{ files.length }})</button>
-      <div class="panel" [class.opened]="opened">
-        <p>Lorem ipsum...</p>
-      </div>
-    </div>
-  </ng-template>
+  <div class="column">
+    <span class="file">Zobacz raport</span>
+  </div>
+  <div class="column" style="flex: 1">
+    <ng-container [ngSwitch]="files.length">
+      <ng-container *ngSwitchCase="0"></ng-container>
+      <ng-container *ngSwitchCase="1">
+        <span class="file"
+          >Pobierz {{ files[0].filename }}.pdf ({{
+            getFileSize(files[0].filesize)
+          }})</span
+        >
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <div (click)="opened = !opened" [class.opened]="opened">
+          <div
+            class="accordion"
+            [class.opened]="opened"
+            data-testid="accordion-trigger"
+          >
+            Pliki do pobrania ({{ files.length }})
+            <div class="arrow" [class.opened]="opened"></div>
+          </div>
+          <div class="panel" [class.opened]="opened">
+            <span
+              data-testid="file"
+              class="file"
+              *ngFor="let file of files"
+              (click)="$event.stopPropagation()"
+            >
+              {{ file.filename }}.pdf ({{ getFileSize(file.filesize) }})
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
 </footer>

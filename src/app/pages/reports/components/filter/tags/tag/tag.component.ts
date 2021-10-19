@@ -1,5 +1,5 @@
 import { FilterService } from './../../../../services/filter.service';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { SubSink } from 'subsink';
 
 @Component({

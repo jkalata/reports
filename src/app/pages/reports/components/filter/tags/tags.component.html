@@ -1,5 +1,5 @@
 <div class="tags-container">
-  <app-tag tag="Wszystkie" (click)="resetTags()"></app-tag>
+  <app-tag tag="Wszystkie" data-testid="all" (click)="resetTags()"></app-tag>
   <app-tag
     *ngFor="let tag of tags"
     [tag]="tag"

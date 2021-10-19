@@ -2,7 +2,6 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MockComponents } from 'ng-mocks';
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
-import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {

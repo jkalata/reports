@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import { IReport } from './../interfaces/report.interfaces';
 import { Injectable } from '@angular/core';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 
 @Injectable({

@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { ReportFooterComponent } from './../report-footer/report-footer.component';
 import { MockComponents } from 'ng-mocks';
 import { reportListMock } from './../../mocks/reports.mocks';
@@ -34,5 +35,16 @@ describe('ReportComponent', () => {
     expect(spectator.query(ReportFooterComponent).files).toEqual(
       component.report.files
     );
+  });
+
+  it('formats date from epoch', () => {
+    expect(component.formattedDate).toEqual({
+      date: DateTime.fromMillis(component['report'].date).toFormat(
+        component['dateFormat']
+      ),
+      time: DateTime.fromMillis(component['report'].date).toFormat(
+        component['timeFormat']
+      ),
+    });
   });
 });

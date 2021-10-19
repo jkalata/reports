@@ -1,5 +1,12 @@
-div {
+.report-list-container {
   background: white;
   padding: 0 2em;
   margin-top: 2em;
+  .report {
+    border-bottom: solid 1px lightgrey;
+  }
+
+  .report:last-child {
+    border: none;
+  }
 }

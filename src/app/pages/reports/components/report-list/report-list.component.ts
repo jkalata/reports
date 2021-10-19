@@ -1,5 +1,5 @@
 import { IReport } from './../../interfaces/report.interfaces';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-report-list',

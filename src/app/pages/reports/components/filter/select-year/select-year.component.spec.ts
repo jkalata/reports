@@ -3,7 +3,6 @@ import { FilterService } from './../../../services/filter.service';
 
 import { SelectYearComponent } from './select-year.component';
 import { Spectator, createComponentFactory, byRole } from '@ngneat/spectator';
-import { MockProvider } from 'ng-mocks';
 
 describe('SelectYearComponent', () => {
   let component: SelectYearComponent;
@@ -35,5 +34,15 @@ describe('SelectYearComponent', () => {
     expect(spectator.queryAll(byRole('option'))).toHaveLength(
       expectedYearsMock.length
     );
+  });
+
+  it('changes year filter', () => {
+    spectator.fixture.whenStable().then(() => {
+      const year = '2010';
+      component.changeYearFilter({ event: { target: year } });
+      expect(
+        spectator.inject(FilterService).setActiveYearFilter
+      ).toHaveBeenCalledWith(Number(year));
+    });
   });
 });

@@ -1,7 +1,8 @@
+import { of } from 'rxjs';
 import { TagComponent } from './tag/tag.component';
 import { MockComponent } from 'ng-mocks';
 import { TagsComponent } from './tags.component';
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { Spectator, createComponentFactory, byTestId } from '@ngneat/spectator';
 import { FilterService } from '../../../services/filter.service';
 
 describe('TagsComponent', () => {
@@ -13,6 +14,9 @@ describe('TagsComponent', () => {
     'FilterService',
     {
       getAvailableTags: tagList,
+      getActiveTags: of([tagList[0]]),
+      removeActiveTag: undefined,
+      resetActiveTags: undefined,
     }
   );
 
@@ -40,5 +44,10 @@ describe('TagsComponent', () => {
   it('passes inputs to TagComponent', () => {
     expect(spectator.queryAll(TagComponent)[0].tag).toEqual('Wszystkie');
     expect(spectator.queryAll(TagComponent)[1].tag).toEqual(tagList[0]);
+  });
+
+  it('resets tags when "all" clicked', () => {
+    spectator.click(byTestId('all'));
+    expect(spectator.inject(FilterService).resetActiveTags).toHaveBeenCalled();
   });
 });
